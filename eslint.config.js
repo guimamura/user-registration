@@ -16,10 +16,17 @@ export default [
 
   js.configs.recommended,
   ...pluginVue.configs['flat/essential'],
-  
+
   {
     ...pluginVitest.configs.recommended,
     files: ['src/**/__tests__/*'],
   },
   skipFormatting,
+
+  {
+    name: 'custom/vue-rules',
+    rules: {
+      'vue/multi-word-component-names': 'off',
+    },
+  },
 ]
