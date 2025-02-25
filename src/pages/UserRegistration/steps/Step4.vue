@@ -2,6 +2,7 @@
   <Grid>
     <Stepper current="4" total="4" />
     <Title title="Revise suas informações" />
+
     <InputText v-model="localFormData.email" label="Endereço de e-mail" readonly />
     <InputText v-model="localFormData.name" :label="labels.name" readonly />
     <InputText v-model="localFormData.document" :label="labels.document" readonly />
