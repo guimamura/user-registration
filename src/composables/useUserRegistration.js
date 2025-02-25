@@ -1,15 +1,18 @@
-import { ref } from 'vue'
+import { reactive } from 'vue'
 
 export function useUserRegistration() {
-  const formData = ref({
-    name: '',
+  const formData = reactive({
     email: '',
+    type: 'PF',
+    name: '',
+    document: '',
+    date: '',
+    phone: '',
     password: '',
-    address: '',
   })
 
   const updateFormData = (newData) => {
-    formData.value = { ...formData.value, ...newData }
+    Object.assign(formData, newData)
   }
 
   const submitForm = async () => {
@@ -17,7 +20,7 @@ export function useUserRegistration() {
       const response = await fetch('/registration', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData.value),
+        body: JSON.stringify(formData),
       })
 
       if (!response.ok) {

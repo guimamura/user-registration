@@ -1,13 +1,19 @@
 <template>
   <Grid>
     <Stepper current="2" total="4" />
-    <Title title="Pessoa Física" />
-    <Title title="Pessoa Jurídica" />
+
+    <Title :title="labels.title" />
+
+    <InputText v-model="localFormData.name" :label="labels.name" />
+    <InputText v-model="localFormData.document" :label="labels.document" />
+    <InputText v-model="localFormData.date" :label="labels.date" />
+    <InputText v-model="localFormData.phone" label="Telefone" />
+
     <Row>
-      <Col cols="6">
+      <Col :cols="6">
         <Button variant="ghost" @click="prev" fullWidth>Voltar</Button>
       </Col>
-      <Col cols="6">
+      <Col :cols="6">
         <Button @click="next" fullWidth>Continuar</Button>
       </Col>
     </Row>
@@ -15,31 +21,30 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import Button from '@/components/Button.vue'
 import Col from '@/components/Col.vue'
 import Grid from '@/components/Grid.vue'
+import InputText from '@/components/InputText.vue'
 import Row from '@/components/Row.vue'
 import Stepper from '@/components/Stepper.vue'
 import Title from '@/components/Title.vue'
 
+const props = defineProps(['formData'])
 const emit = defineEmits(['prev', 'next'])
-const name = ref('')
-const document = ref('')
-const date = ref('')
-const phone = ref('')
 
-const prev = () => {
-  emit('prev')
-}
-const next = () => {
-  emit('next', {
-    name: name.value,
-    document: document.value,
-    date: date.value,
-    phone: phone.value,
-  })
-}
+const localFormData = ref({ ...props.formData })
+
+const labels = computed(() => {
+  const isPF = props.formData.type === 'PF'
+  return {
+    title: isPF ? 'Pessoa Física' : 'Pessoa Jurídica',
+    name: isPF ? 'Nome' : 'Razão Social',
+    document: isPF ? 'CPF' : 'CNPJ',
+    date: isPF ? 'Data de nascimento' : 'Data de abertura',
+  }
+})
+
+const prev = () => emit('prev', localFormData.value)
+const next = () => emit('next', localFormData.value)
 </script>
-
-<style scoped></style>

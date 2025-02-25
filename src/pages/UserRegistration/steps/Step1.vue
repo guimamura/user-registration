@@ -3,14 +3,14 @@
     <Stepper current="1" total="4" />
     <Title title="Seja bem-vindo(a)" />
 
-    <InputText v-model="email" label="Endereço de e-mail" />
+    <InputText v-model="localFormData.email" label="Endereço de e-mail" />
 
     <Row>
-      <Col cols="6">
-        <InputRadio v-model="type" value="PF" label="Pessoa Física" />
+      <Col :cols="6">
+        <InputRadio v-model="localFormData.type" value="PF" label="Pessoa Física" />
       </Col>
-      <Col cols="6">
-        <InputRadio v-model="type" value="PJ" label="Pessoa Jurídica" />
+      <Col :cols="6">
+        <InputRadio v-model="localFormData.type" value="PJ" label="Pessoa Jurídica" />
       </Col>
     </Row>
 
@@ -33,14 +33,12 @@ import Row from '@/components/Row.vue'
 import Stepper from '@/components/Stepper.vue'
 import Title from '@/components/Title.vue'
 
+const props = defineProps(['formData'])
 const emit = defineEmits(['next'])
-const email = ref('')
-const type = ref('PF')
+
+const localFormData = ref({ ...props.formData })
 
 const next = () => {
-  emit('next', {
-    email: email.value,
-    type: type.value,
-  })
+  emit('next', localFormData.value)
 }
 </script>

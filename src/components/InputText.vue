@@ -1,12 +1,16 @@
 <template>
   <div>
     <label>{{ label }}</label>
-    <input :value="modelValue" @input="$emit('update:modelValue', $event.target.value)" />
+    <input
+      :value="modelValue"
+      :readonly="readonly"
+      @input="$emit('update:modelValue', $event.target.value)"
+    />
   </div>
 </template>
 
 <script setup>
-defineProps(['label', 'modelValue'])
+defineProps(['label', 'modelValue', 'readonly'])
 defineEmits(['update:modelValue'])
 </script>
 
@@ -16,5 +20,10 @@ input {
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
+}
+
+input[readonly] {
+  background-color: #f3f3f3;
+  cursor: not-allowed;
 }
 </style>
