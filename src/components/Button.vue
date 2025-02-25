@@ -1,22 +1,16 @@
 <script setup>
 import { computed } from 'vue'
 
-const props = defineProps({
-  variant: {
-    type: String,
-    default: 'default',
-    validator: (value) => ['default', 'ghost'].includes(value),
-  },
-  fullWidth: {
-    type: Boolean,
-    default: false,
-  },
-})
+const props = defineProps(['variant', 'fullWidth'])
+
+const variant = props.variant || 'default'
+
+const fullWidth = props.fullWidth !== undefined && props.fullWidth !== false
 
 const buttonClasses = computed(() => ({
-  'btn-default': props.variant === 'default',
-  'btn-ghost': props.variant === 'ghost',
-  'btn-full': props.fullWidth,
+  'btn-default': variant === 'default',
+  'btn-ghost': variant === 'ghost',
+  'btn-full': fullWidth,
 }))
 </script>
 
