@@ -21,7 +21,8 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
+import { useFormLabels } from '@/composables/useFormLabels'
 import Button from '@/components/Button.vue'
 import Col from '@/components/Col.vue'
 import Grid from '@/components/Grid.vue'
@@ -33,17 +34,9 @@ import Title from '@/components/Title.vue'
 const props = defineProps(['formData'])
 const emit = defineEmits(['prev', 'next'])
 
-const localFormData = ref({ ...props.formData })
+const { labels } = useFormLabels(props.formData)
 
-const labels = computed(() => {
-  const isPF = props.formData.type === 'PF'
-  return {
-    title: isPF ? 'Pessoa Física' : 'Pessoa Jurídica',
-    name: isPF ? 'Nome' : 'Razão Social',
-    document: isPF ? 'CPF' : 'CNPJ',
-    date: isPF ? 'Data de nascimento' : 'Data de abertura',
-  }
-})
+const localFormData = ref({ ...props.formData })
 
 const prev = () => emit('prev', localFormData.value)
 const next = () => emit('next', localFormData.value)
