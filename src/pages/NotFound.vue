@@ -1,9 +1,10 @@
 <template>
-  <div>
-    <h1>Página não encontrada</h1>
-  </div>
+  <Title title="Página não encontrada" />
+  <a href="/registration">Ir para a página de cadastro</a>
 </template>
 
-<script setup></script>
+<script setup>
+import Title from '@/components/Title.vue'
+</script>
 
 <style scoped></style>
