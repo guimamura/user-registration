@@ -2,6 +2,8 @@
   --color-white: #ffffff;
   --color-black: #000000;
   --color-orange: #ff9900;
+  --color-orange-hover: #e68a00;
+  --color-orange-hover-ghost: rgba(255, 127, 0, 0.1);
 }
 
 :root {

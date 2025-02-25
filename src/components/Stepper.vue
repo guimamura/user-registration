@@ -1,9 +1,15 @@
 <template>
-  <div>Etapa {{ current }} de {{ total }}</div>
+  <div>
+    Etapa <span class="highlight">{{ current }}</span> de {{ total }}
+  </div>
 </template>
 
 <script setup>
 defineProps(['current', 'total'])
 </script>
 
-<style scoped></style>
+<style scoped>
+.highlight {
+  color: var(--color-orange);
+}
+</style>
