@@ -1,7 +1,7 @@
 <template>
   <Grid>
     <Stepper current="1" total="4" />
-    <Title title="Seja bem vindo(a)" />
+    <Title title="Seja bem-vindo(a)" />
 
     <InputText v-model="email" label="Endereço de e-mail" />
 
