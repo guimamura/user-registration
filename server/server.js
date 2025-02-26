@@ -42,6 +42,13 @@ app.post("/registration", express.json(), (req, res) => {
       .json({ error: "Data inválida (Formato esperado: DD/MM/AAAA)" });
   }
 
+  const phoneRegex = /^\(\d{2}\) \d{5}-\d{4}$/;
+  if (!phoneRegex.test(phone)) {
+    return res.status(400).json({
+      error: "Telefone inválido (Formato esperado: (XX) XXXXX-XXXX)",
+    });
+  }
+
   console.log("Dados recebidos:", req.body);
   res.json({ message: "Cadastro recebido com sucesso!" });
 });

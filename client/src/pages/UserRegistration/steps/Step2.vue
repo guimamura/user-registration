@@ -9,9 +9,20 @@
       v-model="localFormData.document"
       :label="labels.document"
       :errorMessage="errors.document"
+      v-mask="documentMask"
     />
-    <InputText v-model="localFormData.date" :label="labels.date" :errorMessage="errors.date" />
-    <InputText v-model="localFormData.phone" label="Telefone" :errorMessage="errors.phone" />
+    <InputText
+      v-model="localFormData.date"
+      :label="labels.date"
+      :errorMessage="errors.date"
+      v-mask="'##/##/####'"
+    />
+    <InputText
+      v-model="localFormData.phone"
+      label="Telefone"
+      :errorMessage="errors.phone"
+      v-mask="phoneMask"
+    />
 
     <Row>
       <Col :cols="6">
@@ -25,7 +36,7 @@
 </template>
 
 <script setup>
-import { reactive, watch } from 'vue'
+import { computed, reactive, watch } from 'vue'
 import { useFormLabels } from '@/composables/useFormLabels'
 import Button from '@/components/Button.vue'
 import Col from '@/components/Col.vue'
@@ -48,6 +59,12 @@ watch(
     Object.assign(localFormData, newVal)
   },
 )
+
+const documentMask = computed(() =>
+  localFormData.type === 'PF' ? '###.###.###-##' : '##.###.###/####-##',
+)
+
+const phoneMask = computed(() => '(##) #####-####')
 
 const prev = () => emit('prev', localFormData)
 const next = () => emit('next', localFormData)

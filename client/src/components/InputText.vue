@@ -11,7 +11,7 @@
 </template>
 
 <script setup>
-defineProps(['label', 'modelValue', 'readonly', 'errorMessage'])
+defineProps(['label', 'modelValue', 'errorMessage'])
 defineEmits(['update:modelValue'])
 </script>
 
