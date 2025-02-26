@@ -15,7 +15,13 @@
       @next="nextStep"
       @prev="prevStep"
     />
-    <Step4 v-if="currentStep === 4" :formData="formData" @prev="prevStep" @submit="submitForm" />
+    <Step4
+      v-if="currentStep === 4"
+      :formData="formData"
+      :errors="errors"
+      @prev="prevStep"
+      @submit="submitStep"
+    />
   </div>
 </template>
 
@@ -41,5 +47,13 @@ const nextStep = (data) => {
 const prevStep = (data) => {
   updateFormData(data)
   currentStep.value--
+}
+
+const submitStep = (data) => {
+  updateFormData(data)
+  console.log(currentStep.value)
+  if (validateForm(currentStep.value)) {
+    submitForm()
+  }
 }
 </script>
