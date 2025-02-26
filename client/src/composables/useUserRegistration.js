@@ -1,4 +1,5 @@
 import { reactive } from 'vue'
+import { isValidEmail, isValidDate, isValidCPF, isValidCNPJ } from '@/utils/validators'
 
 export function useUserRegistration() {
   const formData = reactive({
@@ -25,13 +26,6 @@ export function useUserRegistration() {
     text: '',
   })
 
-  const isValidEmail = (email) => /\S+@\S+\.\S+/.test(email)
-
-  const isValidDate = (date) => {
-    const regex = /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/
-    return regex.test(date)
-  }
-
   const updateFormData = (newData) => {
     for (const key in newData) {
       if (Object.prototype.hasOwnProperty.call(formData, key)) {
@@ -51,6 +45,14 @@ export function useUserRegistration() {
     if (step === 2 || step === 4) {
       if (!formData.name.trim()) errors.name = 'Este campo é obrigatório'
       if (!formData.document.trim()) errors.document = 'Este campo é obrigatório'
+      else {
+        if (formData.type === 'PF' && !isValidCPF(formData.document)) {
+          errors.document = 'CPF inválido'
+        }
+        if (formData.type === 'PJ' && !isValidCNPJ(formData.document)) {
+          errors.document = 'CNPJ inválido'
+        }
+      }
       if (!formData.date.trim()) errors.date = 'Este campo é obrigatório'
       else if (!isValidDate(formData.date)) errors.date = 'Data inválida (DD/MM/AAAA)'
       if (!formData.phone.trim()) errors.phone = 'Este campo é obrigatório'
