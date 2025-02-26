@@ -19,8 +19,16 @@ npm install
 ### Compile and Hot-Reload for Development
 
 ```sh
+npm start
+```
+
+or
+
+```sh
 npm run dev
 ```
+
+After starting the application, go to http://localhost:5173/registration for the user registration page
 
 ### Compile and Minify for Production
 
