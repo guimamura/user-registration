@@ -1,41 +1,24 @@
-# user-registration
+# Cadastro de Usuário
 
-This template should help get you started developing with Vue 3 in Vite.
+## 📂 Estrutura
 
-## Recommended IDE Setup
+- `/client`: Aplicação Vue.js (Front-end)
+- `/server`: API Express (Back-end)
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+## 🚀 Como rodar o projeto?
 
-## Customize configuration
-
-See [Vite Configuration Reference](https://vite.dev/config/).
-
-## Project Setup
+### 🔹 Rodar o Front-end (Vue.js)
 
 ```sh
+cd client
 npm install
+npm start
 ```
 
-### Compile and Hot-Reload for Development
+### 🔹 Rodar o Back-end (Express)
 
 ```sh
-npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-### Run Unit Tests with [Vitest](https://vitest.dev/)
-
-```sh
-npm run test:unit
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
+cd server
+npm install
+node server.js
 ```
