@@ -3,7 +3,11 @@
     <Stepper current="1" total="4" />
     <Title title="Seja bem-vindo(a)" />
 
-    <InputText v-model="localFormData.email" label="Endereço de e-mail" />
+    <InputText
+      v-model="localFormData.email"
+      label="Endereço de e-mail"
+      :errorMessage="errors.email"
+    />
 
     <Row>
       <Col :cols="6">
@@ -23,7 +27,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { reactive, watch } from 'vue'
 import Button from '@/components/Button.vue'
 import Col from '@/components/Col.vue'
 import Grid from '@/components/Grid.vue'
@@ -33,12 +37,19 @@ import Row from '@/components/Row.vue'
 import Stepper from '@/components/Stepper.vue'
 import Title from '@/components/Title.vue'
 
-const props = defineProps(['formData'])
+const props = defineProps(['formData', 'errors'])
 const emit = defineEmits(['next'])
 
-const localFormData = ref({ ...props.formData })
+const localFormData = reactive({ ...props.formData })
+
+watch(
+  () => props.formData,
+  (newVal) => {
+    Object.assign(localFormData, newVal)
+  },
+)
 
 const next = () => {
-  emit('next', localFormData.value)
+  emit('next', localFormData)
 }
 </script>

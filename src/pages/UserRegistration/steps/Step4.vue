@@ -22,7 +22,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { reactive } from 'vue'
 import { useFormLabels } from '@/composables/useFormLabels'
 import Button from '@/components/Button.vue'
 import Col from '@/components/Col.vue'
@@ -37,7 +37,7 @@ const emit = defineEmits(['prev', 'submit'])
 
 const { labels } = useFormLabels(props.formData)
 
-const localFormData = ref({ ...props.formData })
+const localFormData = reactive({ ...props.formData })
 
 const prev = () => {
   emit('prev')
