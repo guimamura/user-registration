@@ -38,12 +38,12 @@ export function useUserRegistration() {
   const validateForm = (step) => {
     Object.keys(errors).forEach((key) => (errors[key] = ''))
 
-    if (step === 1) {
+    if (step === 1 || step === 4) {
       if (!formData.email.trim()) errors.email = 'Este campo é obrigatório'
       else if (!isValidEmail(formData.email)) errors.email = 'E-mail inválido'
     }
 
-    if (step === 2) {
+    if (step === 2 || step === 4) {
       if (!formData.name.trim()) errors.name = 'Este campo é obrigatório'
       if (!formData.document.trim()) errors.document = 'Este campo é obrigatório'
       if (!formData.date.trim()) errors.date = 'Este campo é obrigatório'
@@ -51,7 +51,7 @@ export function useUserRegistration() {
       if (!formData.phone.trim()) errors.phone = 'Este campo é obrigatório'
     }
 
-    if (step === 3) {
+    if (step === 3 || step === 4) {
       if (!formData.password.trim()) errors.password = 'Este campo é obrigatório'
     }
 
