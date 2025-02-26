@@ -21,7 +21,12 @@
       :errorMessage="errors.date"
       v-mask="'##/##/####'"
     />
-    <InputText v-model="localFormData.phone" label="Telefone" :errorMessage="errors.phone" />
+    <InputText
+      v-model="localFormData.phone"
+      label="Telefone"
+      :errorMessage="errors.phone"
+      v-mask="phoneMask"
+    />
     <InputText v-model="localFormData.password" label="Senha" :errorMessage="errors.password" />
 
     <Row>
@@ -63,6 +68,8 @@ watch(
 const documentMask = computed(() =>
   localFormData.type === 'PF' ? '###.###.###-##' : '##.###.###/####-##',
 )
+
+const phoneMask = computed(() => '(##) #####-####')
 
 const prev = () => {
   emit('prev', localFormData)
