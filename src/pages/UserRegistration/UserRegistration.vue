@@ -51,7 +51,6 @@ const prevStep = (data) => {
 
 const submitStep = (data) => {
   updateFormData(data)
-  console.log(currentStep.value)
   if (validateForm(currentStep.value)) {
     submitForm()
   }
