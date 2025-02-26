@@ -19,6 +19,7 @@
       v-if="currentStep === 4"
       :formData="formData"
       :errors="errors"
+      :statusMessage="statusMessage"
       @prev="prevStep"
       @submit="submitStep"
     />
@@ -33,7 +34,8 @@ import Step2 from './steps/Step2.vue'
 import Step3 from './steps/Step3.vue'
 import Step4 from './steps/Step4.vue'
 
-const { formData, errors, updateFormData, validateForm, submitForm } = useUserRegistration()
+const { formData, errors, updateFormData, validateForm, submitForm, statusMessage } =
+  useUserRegistration()
 
 const currentStep = ref(1)
 

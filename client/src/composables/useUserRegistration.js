@@ -20,6 +20,11 @@ export function useUserRegistration() {
     password: '',
   })
 
+  const statusMessage = reactive({
+    type: '',
+    text: '',
+  })
+
   const isValidEmail = (email) => /\S+@\S+\.\S+/.test(email)
 
   const isValidDate = (date) => {
@@ -66,15 +71,19 @@ export function useUserRegistration() {
         body: JSON.stringify(formData),
       })
 
+      const data = await response.json()
+
       if (!response.ok) {
-        throw new Error('Erro ao enviar o formulário')
+        throw new Error(data.error || 'Erro ao enviar o formulário')
       }
 
-      console.log('Registro concluído com sucesso!')
+      statusMessage.type = 'success'
+      statusMessage.text = 'Cadastro realizado com sucesso!'
     } catch (error) {
-      console.error(error)
+      statusMessage.type = 'error'
+      statusMessage.text = error.message
     }
   }
 
-  return { formData, errors, updateFormData, validateForm, submitForm }
+  return { formData, errors, statusMessage, updateFormData, validateForm, submitForm }
 }

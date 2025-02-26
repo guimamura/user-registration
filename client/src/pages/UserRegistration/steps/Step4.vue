@@ -3,6 +3,10 @@
     <Stepper current="4" total="4" />
     <Title title="Revise suas informações" />
 
+    <Alert v-if="statusMessage.text" :type="statusMessage.type">
+      {{ statusMessage.text }}
+    </Alert>
+
     <InputText
       v-model="localFormData.email"
       label="Endereço de e-mail"
@@ -43,6 +47,7 @@
 <script setup>
 import { computed, reactive, watch } from 'vue'
 import { useFormLabels } from '@/composables/useFormLabels'
+import Alert from '@/components/Alert.vue'
 import Button from '@/components/Button.vue'
 import Col from '@/components/Col.vue'
 import Grid from '@/components/Grid.vue'
@@ -51,7 +56,7 @@ import Row from '@/components/Row.vue'
 import Stepper from '@/components/Stepper.vue'
 import Title from '@/components/Title.vue'
 
-const props = defineProps(['formData', 'errors'])
+const props = defineProps(['formData', 'errors', 'statusMessage'])
 const emit = defineEmits(['prev', 'submit'])
 
 const { labels } = useFormLabels(props.formData)
